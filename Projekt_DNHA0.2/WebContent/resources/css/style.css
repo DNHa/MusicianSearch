@@ -1,0 +1,30 @@
+body {
+	background-color: black;
+}
+
+
+#imagePanel{
+
+padding-bottom:350px;
+	width: 480px;
+	
+}
+
+#bioTxtPanel{
+	
+	width: 230px;
+	padding-right: 10px;
+	
+}
+
+#bioField{
+	max-width:260px;
+	max-height:500px;
+	position: relative;
+
+
+}
+#linkBox{
+	padding-bottom: 250px;
+		
+}

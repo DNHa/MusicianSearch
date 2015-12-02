@@ -17,8 +17,8 @@
 		<p:layoutUnit position="north" resizable="true" size="80">
 			<h:outputText value="MUSICIAN SEARCH" />		
 		</p:layoutUnit>
-		<p:layoutUnit position="west" resizable="true" size="240"
-			minSize="200" maxSize="300">
+		<p:layoutUnit position="west" resizable="true" size="270"
+			minSize="200" maxSize="270">
 			<h:form>
 				<p:selectOneMenu value="#{musicServiceBean.currentStyle}">
 					<f:selectItems value="#{musicServiceBean.styles}" />
@@ -42,15 +42,15 @@
 				value="#{musicServiceBean.artistList}" selectionMode="single"
 				selection="#{musicServiceBean.selectedArtist}" rowKey="#{artist.id}">
 				<p:ajax event="rowSelect" listener="#{musicServiceBean.onRowSelect}"
-					update="urlPanel imagepanel" />
+					update="urlPanel imagePanel bioTxtPanel" />
 				<p:column>
 					<h:outputText value="#{artist.name}" />
 				</p:column>
 
 			</p:dataTable>
 		</p:layoutUnit>
-		<p:layoutUnit position="east" resizable="false" size="500"
-			minSize="250" maxSize="500" >
+		<p:layoutUnit id="linkBox" position="east" resizable="false" size="500"
+			minSize="100" maxSize="500" >
 			<p:panelGrid id="urlPanel" columns="2" style="width: 100%">
 				<h:outputText value="Official" />
 				<p:link href="#{musicServiceBean.currentURLs.official_url}"
@@ -72,21 +72,22 @@
 					value="#{musicServiceBean.currentURLs.twitter_url}" />					
 			</p:panelGrid>
 		
-			<p:panel id="imagepanel">			
+			<p:panel id="imagePanel">			
 				<ui:repeat value="#{musicServiceBean.imageURLs.urls}" var="item">
-				  <p:graphicImage cache="false" value="#{item}" width="160" height="160"/>
+				  <p:graphicImage cache="false" value="#{item}" width="125" height="125"/>
 				</ui:repeat>
 				<!-- p:graphicImage value="#{musicServiceBean.imageURLs.urls[0]}"/> -->
 				<p:graphicImage cache="false" value="/resources/img/images.png" rendered="#{empty musicServiceBean.imageURLs.urls}"/>
 			</p:panel>
 		</p:layoutUnit>
 	
-		<p:layoutUnit position="south" resizable="true" size="500" minSize="100" maxSize="200">
-			<h:outputText value="BIOGRAPHY" />
-			
-		
+		<p:layoutUnit id="bioField" position="south" resizable="true" size="150" minSize="100" maxSize="150">
+			<h:outputText value="Biography" />
+			<p:panel id="bioTxtPanel">
+					<h:outputText value="#{musicServiceBean.biographiesTxt}" />
+			</p:panel>	
 		</p:layoutUnit>
-		
+	
 	
 	</p:layout>
 

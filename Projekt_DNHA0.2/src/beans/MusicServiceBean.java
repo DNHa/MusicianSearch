@@ -13,6 +13,7 @@ import org.primefaces.event.SelectEvent;
 import model.Artist;
 import model.ArtistURLs;
 import model.Artists;
+import model.Biographies;
 import model.ImageURLs;
 import service.JSONServiceHandler;
 
@@ -28,6 +29,7 @@ public class MusicServiceBean {
 	private Artist selectedArtist;
 	private ArtistURLs currentURLs = new ArtistURLs();
 	private ImageURLs imageURLs;
+	private Biographies biographiesTxt;
 
 
 	// Stelle zum initialisieren
@@ -94,7 +96,7 @@ public class MusicServiceBean {
 		System.out.println("artist: " + artist);
 		setCurrentURLs(sh.createArtistURLs(artist.getId()));
 		setImageURLs(sh.createImageURLs(artist.getId()));
-
+		setBiographiesTxt(sh.createBiographiesTxt(artist.getId()));
 	}
 
 	public ArtistURLs getCurrentURLs() {
@@ -111,6 +113,14 @@ public class MusicServiceBean {
 
 	public void setImageURLs(ImageURLs imageURLs) {
 		this.imageURLs = imageURLs;
+	}
+
+	public Biographies getBiographiesTxt() {
+		return biographiesTxt;
+	}
+
+	public void setBiographiesTxt(Biographies biographiesTxt) {
+		this.biographiesTxt = biographiesTxt;
 	}
 
 

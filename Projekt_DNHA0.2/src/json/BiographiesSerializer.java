@@ -8,6 +8,8 @@ import com.google.gson.JsonDeserializer;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParseException;
 
+import model.Biographies;
+
 public class BiographiesSerializer implements JsonDeserializer<Biographies>{
 
 	@Override
@@ -22,8 +24,10 @@ public class BiographiesSerializer implements JsonDeserializer<Biographies>{
 			for (JsonElement biography : biographiesArray) {
 				JsonElement bio = biography.getAsJsonObject().get("text");
 				if(bio != null){
-					biographies.addBioTxt(bio.getAsString());
+					biographies.setText(bio.getAsString());
 				}
+				
+				
 			
 			}
 			

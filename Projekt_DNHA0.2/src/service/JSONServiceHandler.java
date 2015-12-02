@@ -10,10 +10,12 @@ import com.sun.jersey.api.client.WebResource.Builder;
 
 import json.ArtistURLsSerializer;
 import json.ArtistsSerializer;
+import json.BiographiesSerializer;
 import json.GenresSerializer;
 import json.ImageURLsSerializer;
 import model.ArtistURLs;
 import model.Artists;
+import model.Biographies;
 import model.Genres;
 import model.ImageURLs;
 
@@ -44,7 +46,7 @@ public final class JSONServiceHandler {
 		Builder b = wr.queryParam("api_key", API_KEY).
 				queryParam("format", "json").
 				queryParam("name", style).
-				queryParam("results", "50").
+				queryParam("results", "100").
 				accept(MediaType.APPLICATION_JSON);
 		
 		return b.get(String.class);		
@@ -90,6 +92,19 @@ public final class JSONServiceHandler {
 		
 	}
 	
+	private String getBiographiesJSON(String artistId){
+		WebResource wr = Client.create().resource("http://developer.echonest.com/api/v4/artist/biographies");
+	
+		Builder b = wr.queryParam("api_key", API_KEY).
+				queryParam("format", "json").
+				queryParam("id", artistId).
+				accept(MediaType.APPLICATION_JSON);
+	
+				
+			return b.get(String.class);
+	
+	}
+	
 	/*
 	 * json -> Object (gson.jar)
 	 */
@@ -126,11 +141,23 @@ public final class JSONServiceHandler {
 		return imageURLs;
 	}
 
+	public Biographies createBiographiesTxt(String id){
+		GsonBuilder gsonBuilder = new GsonBuilder();
+		gsonBuilder.registerTypeAdapter(Biographies.class, new BiographiesSerializer());
+		Gson gson = gsonBuilder.create();
+		Biographies bioTxt = gson.fromJson(getBiographiesJSON(id), Biographies.class);
+		System.out.println(bioTxt);
+		return bioTxt;
+	
+	
+	}
+	
 	public static void main(String[] args) {
 		JSONServiceHandler service = new JSONServiceHandler();
 		//System.out.println("-->"+service.getArtistsJSON("rock",100+""));
-		//System.out.println(service.getArtistsURLsJSON("ARH6W4X1187B99274F"));
+		System.out.println(service.getArtistsURLsJSON("ARH6W4X1187B99274F"));
 		System.out.println(service.createArtistURLs("ARH6W4X1187B99274F"));
+		System.out.println(service.createBiographiesTxt("ARH6W4X1187B99274F"));
 	}
 
 }
