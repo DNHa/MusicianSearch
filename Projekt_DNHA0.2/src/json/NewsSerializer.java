@@ -20,10 +20,10 @@ public NewsURLs deserialize (JsonElement jsonElement, Type arg1, JsonDeserializa
 	JsonElement newsElement = responseElement.getAsJsonObject().get("news");
 	JsonArray newsArray = newsElement.getAsJsonArray();
 	
-	for (JsonElement _news : newsArray) {
-		JsonElement news_ = _news.getAsJsonObject().get("text");
-		if(news_ != null){
-			news.addNewsText(_news.getAsString());
+	for (JsonElement newsURLs : newsArray) {
+		JsonElement news1 = newsURLs.getAsJsonObject().get("summary");
+		if(news1 != null){
+			news.setNewsURLs(news1.getAsString());
 		}
 	
 	}

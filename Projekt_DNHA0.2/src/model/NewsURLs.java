@@ -1,20 +1,24 @@
 package model;
 
-import java.util.ArrayList;
-
 public class NewsURLs {
 
-	private ArrayList<String> urls = new ArrayList<String>();
+	private String NewsURLs= new String ();
 
-	public ArrayList<String> getUrls() {
-		return urls;
+	public String getNewsURLs() {
+		return NewsURLs;
 	}
 
-	public void setUrls(ArrayList<String> urls) {
-		this.urls = urls;
+	public void setNewsURLs(String newsURLs) {
+		NewsURLs = newsURLs;
 	}
-	public String toString(){
-		return "[News " + urls + "]";
+
+	@Override
+	public String toString() {
+		return "" + NewsURLs + "";
 	}
+
+
+
+
 }
 

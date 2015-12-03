@@ -15,6 +15,7 @@ import model.ArtistURLs;
 import model.Artists;
 import model.Biographies;
 import model.ImageURLs;
+import model.NewsURLs;
 import service.JSONServiceHandler;
 
 @ManagedBean
@@ -30,7 +31,7 @@ public class MusicServiceBean {
 	private ArtistURLs currentURLs = new ArtistURLs();
 	private ImageURLs imageURLs;
 	private Biographies biographiesTxt;
-
+	private NewsURLs newsURLs;
 
 	// Stelle zum initialisieren
 	@PostConstruct
@@ -97,6 +98,7 @@ public class MusicServiceBean {
 		setCurrentURLs(sh.createArtistURLs(artist.getId()));
 		setImageURLs(sh.createImageURLs(artist.getId()));
 		setBiographiesTxt(sh.createBiographiesTxt(artist.getId()));
+		setNewsURLs(sh.createNewsURLs(artist.getId()));
 	}
 
 	public ArtistURLs getCurrentURLs() {
@@ -121,6 +123,14 @@ public class MusicServiceBean {
 
 	public void setBiographiesTxt(Biographies biographiesTxt) {
 		this.biographiesTxt = biographiesTxt;
+	}
+
+	public NewsURLs getNewsURLs() {
+		return newsURLs;
+	}
+
+	public void setNewsURLs(NewsURLs newsURLs) {
+		this.newsURLs = newsURLs;
 	}
 
 

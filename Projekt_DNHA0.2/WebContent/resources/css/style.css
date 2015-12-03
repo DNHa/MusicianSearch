@@ -3,6 +3,16 @@ body {
 }
 
 
+#topic{
+	font-size: 60px;
+	font-family: Lucida Console;}
+	
+#logo{
+	padding-left: 30px;
+	padding-top:10px;
+	size: 100px;
+}
+
 #imagePanel{
 
 padding-bottom:350px;
@@ -10,21 +20,30 @@ padding-bottom:350px;
 	
 }
 
-#bioTxtPanel{
-	
-	width: 230px;
+#news{
+	max-width: 230px;
 	padding-right: 10px;
+	border: none;
+}
+#newsPanel{
+	border: none;
+}
+		
+#bioTxtPanel{
+	width: 230px;
+	padding-right:100px;
+	border: none;
 	
 }
 
 #bioField{
-	max-width:260px;
-	max-height:500px;
-	position: relative;
+	max-width:250px;
+	position: absolute;
+	border: none;
 
-
+	
 }
 #linkBox{
-	padding-bottom: 250px;
+	padding-bottom: 200px;
 		
 }

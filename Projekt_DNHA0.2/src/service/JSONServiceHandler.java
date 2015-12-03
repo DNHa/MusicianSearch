@@ -13,11 +13,13 @@ import json.ArtistsSerializer;
 import json.BiographiesSerializer;
 import json.GenresSerializer;
 import json.ImageURLsSerializer;
+import json.NewsSerializer;
 import model.ArtistURLs;
 import model.Artists;
 import model.Biographies;
 import model.Genres;
 import model.ImageURLs;
+import model.NewsURLs;
 
 public final class JSONServiceHandler {
 	public static final String API_KEY = "GJXTDB6QSTDCUQ6U3";
@@ -99,7 +101,18 @@ public final class JSONServiceHandler {
 				queryParam("format", "json").
 				queryParam("id", artistId).
 				accept(MediaType.APPLICATION_JSON);
+				
+			return b.get(String.class);
 	
+	}
+	
+	private String getNewsURLsJSON(String artistId){
+		WebResource wr = Client.create().resource("http://developer.echonest.com/api/v4/artist/news");
+		
+		Builder b = wr.queryParam("api_key", API_KEY).
+				queryParam("format", "json").
+				queryParam("id", artistId).
+				accept(MediaType.APPLICATION_JSON);
 				
 			return b.get(String.class);
 	
@@ -129,7 +142,7 @@ public final class JSONServiceHandler {
 		gsonBuilder.registerTypeAdapter(ArtistURLs.class, new ArtistURLsSerializer());
 		Gson gson = gsonBuilder.create();
 		ArtistURLs artistURLs = gson.fromJson(getArtistsURLsJSON(id), ArtistURLs.class);
-		System.out.println(artistURLs);
+//		System.out.println(artistURLs);
 		return artistURLs;
 	}
 	public ImageURLs createImageURLs(String id) {
@@ -137,7 +150,7 @@ public final class JSONServiceHandler {
 		gsonBuilder.registerTypeAdapter(ImageURLs.class, new ImageURLsSerializer());
 		Gson gson = gsonBuilder.create();
 		ImageURLs imageURLs = gson.fromJson(getImageURLsJSON(id), ImageURLs.class);
-		System.out.println(imageURLs);
+//		System.out.println(imageURLs);
 		return imageURLs;
 	}
 
@@ -146,18 +159,30 @@ public final class JSONServiceHandler {
 		gsonBuilder.registerTypeAdapter(Biographies.class, new BiographiesSerializer());
 		Gson gson = gsonBuilder.create();
 		Biographies bioTxt = gson.fromJson(getBiographiesJSON(id), Biographies.class);
-		System.out.println(bioTxt);
+//		System.out.println(bioTxt);
 		return bioTxt;
 	
+	}
 	
+	public NewsURLs createNewsURLs(String id){
+		GsonBuilder gsonBuilder = new GsonBuilder();
+		gsonBuilder.registerTypeAdapter(NewsURLs.class, new NewsSerializer());
+		Gson  gson = gsonBuilder.create();
+		NewsURLs newsURLs = gson.fromJson(getNewsURLsJSON(id), NewsURLs.class);
+		System.out.println(newsURLs);
+		
+		return newsURLs;
+		
 	}
 	
 	public static void main(String[] args) {
 		JSONServiceHandler service = new JSONServiceHandler();
 		//System.out.println("-->"+service.getArtistsJSON("rock",100+""));
-		System.out.println(service.getArtistsURLsJSON("ARH6W4X1187B99274F"));
-		System.out.println(service.createArtistURLs("ARH6W4X1187B99274F"));
-		System.out.println(service.createBiographiesTxt("ARH6W4X1187B99274F"));
+//		System.out.println(service.getArtistsURLsJSON("ARH6W4X1187B99274F"));
+//		System.out.println(service.createArtistURLs("ARH6W4X1187B99274F"));
+//		System.out.println(service.createBiographiesTxt("ARH6W4X1187B99274F"));
+
+		System.out.println(service.createNewsURLs("ARH6W4X1187B99274F"));
 	}
 
 }
